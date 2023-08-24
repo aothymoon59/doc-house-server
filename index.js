@@ -34,7 +34,7 @@ async function run() {
         User Related APIs
     ----------------------------*/
 
-    // post users to database
+    // post doc house users to database
     app.post("/users", async (req, res) => {
       const user = req.body;
       const query = { email: user.email };
