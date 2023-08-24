@@ -29,6 +29,7 @@ async function run() {
   try {
     // await client.connect();
     const usersCollection = client.db("docHouseDB").collection("users");
+    const reviewsCollection = client.db("docHouseDB").collection("reviews");
 
     /*---------------------------
         User Related APIs
@@ -43,6 +44,12 @@ async function run() {
         return res.send({ message: "user already exist" });
       }
       const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
+
+    // get all clients reviews
+    app.get("/reviews", async (req, res) => {
+      const result = await reviewsCollection.find().toArray();
       res.send(result);
     });
 
