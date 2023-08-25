@@ -30,6 +30,7 @@ async function run() {
     // await client.connect();
     const usersCollection = client.db("docHouseDB").collection("users");
     const reviewsCollection = client.db("docHouseDB").collection("reviews");
+    const servicesCollection = client.db("docHouseDB").collection("services");
 
     /*---------------------------
         User Related APIs
@@ -45,6 +46,15 @@ async function run() {
       }
       const result = await usersCollection.insertOne(user);
       res.send(result);
+    });
+
+    // Get filtered services data by category
+    app.get("/services/category/:text", async (req, res) => {
+      const category = req.params.text;
+      const result = await servicesCollection.findOne({
+        category: category,
+      });
+      res.json(result);
     });
 
     // get all clients reviews
